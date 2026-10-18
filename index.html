@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die-Namic Tool & Die | CNC Precision Machining — Ravenna, Ohio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:   #F5F4F0;
+  --warm:    #EDEBE5;
+  --stone:   #D8D5CC;
+  --steel:   #2B2F36;
+  --ink:     #1A1D22;
+  --mid:     #6C7078;
+  --orange:  #D95200;
+  --orange-h:#F06000;
+  --o-tint:  #FDF0E8;
+  --o-dim:   #E8C4A8;
+  --white:   #FFFFFF;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--steel);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ──────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 64px;
+  display: flex; align-items: center;
+  padding: 0 40px;
+  background: rgba(245,244,240,0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--stone);
+}
+.nav-inner {
+  width: 100%; max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; flex-direction: column; gap: 0;
+  text-decoration: none; line-height: 1;
+}
+.nav-logo-top {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 20px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink);
+}
+.nav-logo-top em { font-style: normal; color: var(--orange); }
+.nav-logo-sub {
+  font-size: 9px; font-weight: 400; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--mid);
+  margin-top: 1px;
+}
+.nav-center {
+  display: flex; align-items: center; gap: 4px;
+  list-style: none;
+}
+.nav-center a {
+  display: block; padding: 6px 14px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--mid);
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background 0.18s, color 0.18s;
+}
+.nav-center a:hover { background: var(--warm); color: var(--ink); }
+.nav-center a.active { background: var(--ink); color: var(--white); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-phone {
+  font-size: 12px; font-weight: 500; color: var(--mid);
+  text-decoration: none; letter-spacing: 0.04em;
+  transition: color 0.18s;
+}
+.nav-phone:hover { color: var(--orange); }
+.nav-quote {
+  display: inline-block;
+  border: 1.5px solid var(--orange);
+  color: var(--orange);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 8px 20px; border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s;
+}
+.nav-quote:hover { background: var(--orange); color: #fff; }
+
+/* ── HERO ─────────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  padding-top: 64px;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  background: var(--cream);
+  padding: 80px 72px 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.hero-right {
+  background: #454B56;
+  position: relative;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 48px 44px 48px 60px;
+  overflow: hidden;
+  min-width: 0;
+}
+/* diagonal cut between left and right */
+.hero-left::after {
+  content: '';
+  position: absolute; top: 0; right: -60px; bottom: 0;
+  width: 120px;
+  background: var(--cream);
+  clip-path: polygon(0 0, 40% 0, 100% 100%, 0 100%);
+  z-index: 3;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange);
+  margin-bottom: 28px;
+}
+.hero-tag::before {
+  content: ''; width: 28px; height: 1px; background: var(--orange);
+}
+.hero-h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(64px, 8vw, 108px);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+.hero-h1 em { font-style: normal; color: var(--orange); }
+.hero-desc {
+  font-size: 17px; font-weight: 300; color: var(--mid);
+  max-width: 460px; line-height: 1.75;
+  margin-bottom: 40px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-fill {
+  display: inline-block;
+  background: var(--orange); color: #fff;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 14px 32px; border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.18s, transform 0.12s;
+}
+.btn-fill:hover { background: var(--orange-h); transform: translateY(-1px); }
+.btn-line {
+  display: inline-block;
+  border: 1.5px solid var(--stone); color: var(--steel);
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 14px 32px; border-radius: 2px;
+  text-decoration: none;
+  transition: border-color 0.18s, color 0.18s;
+}
+.btn-line:hover { border-color: var(--steel); color: var(--ink); }
+
+/* right panel — big number feature */
+.hero-right-grid {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative; z-index: 2;
+  min-width: 0;
+}
+/* subtle mesh pattern */
+.hero-mesh {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(217,82,0,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217,82,0,0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.hero-big-stat {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding-top: 40px;
+}
+.hero-big-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(96px, 14vw, 180px);
+  line-height: 0.85;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.hero-big-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.75);
+  margin-top: 8px;
+}
+.hero-stats-stack {
+  display: flex; flex-direction: column; gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+.hstat {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: baseline; gap: 10px;
+  min-width: 0; overflow: hidden;
+}
+.hstat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 30px;
+  color: #fff; line-height: 1;
+  flex-shrink: 0;
+}
+.hstat-val em { font-style: normal; color: var(--orange); }
+.hstat-desc {
+  font-size: 12px; font-weight: 400;
+  color: rgba(255,255,255,0.82); letter-spacing: 0.04em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hero-iso {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 20px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--orange);
+  border: 1px solid rgba(217,82,0,0.6); padding: 5px 10px;
+  border-radius: 2px; align-self: flex-start;
+}
+
+/* ── TICKER ────────────────────────────────────────────────────────────────── */
+.ticker {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden; height: 44px;
+  display: flex; align-items: center;
+}
+.ticker-track {
+  display: flex; gap: 0;
+  animation: tick 28s linear infinite;
+  white-space: nowrap;
+}
+@keyframes tick { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 0 36px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.ticker-dot { width: 3px; height: 3px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+
+/* ── ABOUT ─────────────────────────────────────────────────────────────────── */
+#about {
+  padding: 120px 40px;
+  background: var(--white);
+}
+.about-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 340px 1fr; gap: 100px;
+  align-items: start;
+}
+.about-sidebar { position: sticky; top: 100px; }
+.about-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 120px;
+  line-height: 0.85; color: var(--warm);
+  letter-spacing: -0.02em; margin-bottom: 24px;
+  user-select: none;
+}
+.about-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+}
+.about-tag::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+.about-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 48px;
+  line-height: 0.95; text-transform: uppercase;
+  color: var(--ink); margin-bottom: 20px;
+}
+.about-body {
+  font-size: 16px; font-weight: 300; color: var(--mid);
+  line-height: 1.8; margin-bottom: 32px;
+}
+.about-right { display: flex; flex-direction: column; gap: 0; }
+.about-point {
+  display: grid; grid-template-columns: 48px 1fr;
+  gap: 24px; align-items: start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--warm);
+}
+.about-point:first-child { border-top: 1px solid var(--warm); }
+.about-point-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 0.1em; color: var(--orange);
+  padding-top: 3px;
+}
+.about-point-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 22px;
+  text-transform: uppercase; color: var(--ink);
+  letter-spacing: 0.02em; margin-bottom: 6px;
+}
+.about-point-body { font-size: 14px; color: var(--mid); line-height: 1.7; }
+
+/* ── SERVICES ──────────────────────────────────────────────────────────────── */
+#services {
+  padding: 120px 40px;
+  background: var(--cream);
+}
+.services-inner { max-width: 1280px; margin: 0 auto; }
+.services-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; margin-bottom: 64px;
+}
+.section-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.section-tag::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+.section-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: clamp(40px, 5vw, 60px);
+  line-height: 0.95; text-transform: uppercase; color: var(--ink);
+}
+.services-list { display: flex; flex-direction: column; gap: 0; }
+.svc-row {
+  display: grid; grid-template-columns: 64px 280px 1fr auto;
+  gap: 40px; align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--stone);
+  cursor: default;
+  transition: background 0.18s;
+  border-radius: 4px;
+}
+.svc-row:first-child { border-top: 1px solid var(--stone); }
+.svc-row:hover { background: var(--white); padding-left: 16px; padding-right: 16px; }
+.svc-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 0.12em; color: var(--orange);
+}
+.svc-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 26px;
+  text-transform: uppercase; color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.svc-desc { font-size: 14px; color: var(--mid); line-height: 1.65; max-width: 520px; }
+.svc-tags { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+.tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--orange);
+  background: var(--o-tint);
+  border: 1px solid var(--o-dim);
+  padding: 3px 10px; border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ── EQUIPMENT ─────────────────────────────────────────────────────────────── */
+#equipment {
+  padding: 0;
+  background: var(--ink);
+}
+.eq-split {
+  display: grid; grid-template-columns: 1fr 520px;
+  min-height: 640px;
+}
+.eq-left {
+  padding: 100px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.eq-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+}
+.eq-tag::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+.eq-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: clamp(48px, 6vw, 80px);
+  text-transform: uppercase; color: #fff;
+  line-height: 0.9; margin-bottom: 28px;
+}
+.eq-body { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.8; max-width: 400px; }
+.eq-table {
+  margin-top: 48px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.eq-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  gap: 16px;
+}
+.eq-row-name { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85); }
+.eq-row-detail { font-size: 12px; color: rgba(255,255,255,0.35); text-align: right; }
+.eq-right {
+  background: rgba(255,255,255,0.03);
+  border-left: 1px solid rgba(255,255,255,0.06);
+  padding: 100px 52px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.eq-feature-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange); margin-bottom: 12px;
+}
+.eq-feature-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 42px;
+  text-transform: uppercase; color: #fff;
+  line-height: 1; margin-bottom: 16px;
+}
+.eq-feature-body { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.8; margin-bottom: 32px; }
+.eq-specs { display: flex; flex-direction: column; gap: 12px; }
+.eq-spec {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px; color: rgba(255,255,255,0.6);
+}
+.eq-spec::before {
+  content: ''; width: 20px; height: 1px;
+  background: var(--orange); flex-shrink: 0;
+}
+
+/* ── GALLERY ───────────────────────────────────────────────────────────────── */
+#gallery { padding: 120px 40px; background: var(--ink); }
+.gallery-inner { max-width: 1280px; margin: 0 auto; }
+.gallery-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 56px;
+}
+.gallery-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.gallery-tag::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+.gallery-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: clamp(40px, 5vw, 60px);
+  line-height: 0.95; text-transform: uppercase; color: #fff;
+}
+.gallery-sub {
+  font-size: 14px; font-weight: 300;
+  color: rgba(255,255,255,0.35);
+  max-width: 280px; text-align: right; line-height: 1.7;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 320px 240px 260px;
+  gap: 3px;
+}
+.gitem {
+  overflow: hidden; position: relative; cursor: pointer;
+  background: rgba(255,255,255,0.04);
+}
+.gitem img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.3s;
+  filter: grayscale(15%) brightness(0.82);
+}
+.gitem:hover img { transform: scale(1.05); filter: grayscale(0%) brightness(1); }
+.gitem-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 40px 20px 16px;
+  background: linear-gradient(transparent, rgba(26,29,34,0.85));
+  opacity: 0; transition: opacity 0.22s;
+}
+.gitem:hover .gitem-info { opacity: 1; }
+.gitem-cat {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--orange); margin-bottom: 3px;
+}
+.gitem-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 16px;
+  text-transform: uppercase; color: #fff;
+  letter-spacing: 0.02em; line-height: 1.1;
+}
+/* Row 1 */
+.gitem:nth-child(1) { grid-column: span 7; }
+.gitem:nth-child(2) { grid-column: span 5; }
+/* Row 2 */
+.gitem:nth-child(3) { grid-column: span 4; }
+.gitem:nth-child(4) { grid-column: span 4; }
+.gitem:nth-child(5) { grid-column: span 4; }
+/* Row 3 */
+.gitem:nth-child(6) { grid-column: span 3; }
+.gitem:nth-child(7) { grid-column: span 3; }
+.gitem:nth-child(8) { grid-column: span 3; }
+.gitem:nth-child(9) { grid-column: span 3; }
+
+/* Lightbox */
+.lb-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(10,10,10,0.94);
+  align-items: center; justify-content: center; padding: 40px;
+}
+.lb-overlay.open { display: flex; }
+.lb-box { position: relative; max-width: 1100px; width: 100%; }
+.lb-box img { width: 100%; max-height: 78vh; object-fit: contain; display: block; }
+.lb-cap {
+  margin-top: 14px; text-align: center;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+}
+.lb-close {
+  position: absolute; top: -38px; right: 0;
+  background: none; border: none; cursor: pointer;
+  font-size: 20px; color: rgba(255,255,255,0.35); transition: color 0.15s; line-height: 1;
+}
+.lb-close:hover { color: #fff; }
+.lb-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer; width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.6); font-size: 18px;
+  transition: background 0.15s, color 0.15s;
+}
+.lb-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+.lb-prev { left: -60px; } .lb-next { right: -60px; }
+
+@media (max-width: 1100px) { .lb-prev { left: 8px; } .lb-next { right: 8px; } }
+@media (max-width: 1024px) {
+  #gallery { padding: 80px 28px; }
+  .gallery-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .gallery-sub { text-align: left; max-width: 100%; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gitem { height: 210px; }
+  .gitem:nth-child(n) { grid-column: span 1; }
+  .gitem:nth-child(1) { grid-column: span 2; height: 280px; }
+}
+
+/* ── WORK ──────────────────────────────────────────────────────────────────── */
+#projects { padding: 120px 40px; background: var(--white); }
+.work-inner { max-width: 1280px; margin: 0 auto; }
+.work-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 56px;
+}
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 320px 260px;
+  gap: 3px;
+}
+.wcard { position: relative; overflow: hidden; background: var(--warm); }
+.wcard:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+.wcard:nth-child(2) { grid-column: span 5; }
+.wcard:nth-child(3) { grid-column: span 3; }
+.wcard:nth-child(4) { grid-column: span 2; }
+.wcard-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+}
+.wcard-bg svg { opacity: 0.15; }
+.wcard-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 24px 28px;
+  background: linear-gradient(transparent, rgba(26,29,34,0.85));
+}
+.wcard-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--orange); margin-bottom: 4px;
+}
+.wcard-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 20px;
+  text-transform: uppercase; color: #fff;
+  line-height: 1.1;
+}
+.wcard-meta { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+/* ── PROCESS ───────────────────────────────────────────────────────────────── */
+#process { padding: 120px 40px; background: var(--cream); }
+.process-inner { max-width: 1280px; margin: 0 auto; }
+.process-header { margin-bottom: 80px; }
+.process-timeline {
+  display: grid; grid-template-columns: 1px 1fr;
+  gap: 0 64px;
+  position: relative;
+}
+.timeline-rail {
+  background: var(--stone); width: 1px;
+  position: relative;
+}
+.timeline-rail::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 1px;
+  background: var(--orange);
+  animation: rail-grow 1.8s ease forwards;
+}
+@keyframes rail-grow { from { height: 0; } to { height: 100%; } }
+@media (prefers-reduced-motion: reduce) { .timeline-rail::before { height: 100%; animation: none; } }
+.timeline-steps { display: flex; flex-direction: column; gap: 0; }
+.tstep {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 40px; padding: 40px 0;
+  border-bottom: 1px solid var(--warm);
+  position: relative;
+}
+.tstep::before {
+  content: ''; position: absolute;
+  left: -71px; top: 48px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 2px solid var(--stone);
+  transition: border-color 0.2s, background 0.2s;
+}
+.tstep:hover::before { border-color: var(--orange); background: var(--orange); }
+.tstep-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 52px;
+  color: var(--warm); line-height: 1;
+  user-select: none;
+}
+.tstep-content {}
+.tstep-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 28px;
+  text-transform: uppercase; color: var(--ink);
+  letter-spacing: 0.02em; margin-bottom: 8px;
+  margin-top: 8px;
+}
+.tstep-body { font-size: 15px; color: var(--mid); line-height: 1.7; }
+
+/* ── QUOTE ─────────────────────────────────────────────────────────────────── */
+#quote { padding: 0; }
+.quote-split {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 780px;
+}
+.quote-left {
+  background: var(--ink);
+  padding: 100px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.quote-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+}
+.quote-tag::before { content: ''; width: 24px; height: 1px; background: var(--orange); }
+.quote-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: clamp(48px, 5vw, 72px);
+  text-transform: uppercase; color: #fff;
+  line-height: 0.92; margin-bottom: 24px;
+}
+.quote-body { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 48px; }
+.contact-stack { display: flex; flex-direction: column; gap: 0; }
+.crow {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.crow-icon { color: var(--orange); flex-shrink: 0; margin-top: 2px; }
+.crow-label {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 3px;
+}
+.crow-val { font-size: 15px; color: rgba(255,255,255,0.8); }
+.crow-val a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.18s; }
+.crow-val a:hover { color: var(--orange); }
+
+.quote-right {
+  background: var(--cream);
+  padding: 100px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.form-hed {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 32px;
+  text-transform: uppercase; color: var(--ink);
+  margin-bottom: 32px; letter-spacing: 0.02em;
+}
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fg { margin-bottom: 14px; }
+.fg label {
+  display: block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 6px;
+}
+.fg input, .fg select, .fg textarea {
+  width: 100%; background: var(--white);
+  border: 1px solid var(--stone);
+  color: var(--ink); font-family: 'DM Sans', sans-serif;
+  font-size: 14px; padding: 11px 14px;
+  outline: none; border-radius: 2px;
+  transition: border-color 0.18s;
+  appearance: none;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--orange); }
+.fg textarea { resize: vertical; min-height: 110px; }
+.fg select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%236C7078' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; cursor: pointer;
+}
+.fg select option { background: var(--white); }
+.upload-area {
+  border: 1px dashed var(--stone); background: var(--white);
+  padding: 22px; text-align: center; cursor: pointer;
+  border-radius: 2px; margin-bottom: 16px;
+  transition: border-color 0.18s;
+}
+.upload-area:hover { border-color: var(--orange); }
+.upload-area p { font-size: 13px; color: var(--mid); margin-top: 6px; }
+.upload-area span { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); }
+.upload-area small { font-size: 11px; color: var(--stone); display: block; margin-top: 4px; }
+.btn-send {
+  width: 100%; background: var(--orange); color: #fff; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 17px; border-radius: 2px; cursor: pointer;
+  transition: background 0.18s;
+}
+.btn-send:hover { background: var(--orange-h); }
+
+/* ── FOOTER ────────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 72px 40px 40px;
+}
+.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px; padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.f-brand-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 32px; text-transform: uppercase;
+  color: #fff; letter-spacing: 0.04em; line-height: 1; margin-bottom: 4px;
+}
+.f-brand-name em { font-style: normal; color: var(--orange); }
+.f-brand-sub { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+.f-tagline { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 270px; }
+.f-iso {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 20px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--orange); border: 1px solid rgba(217,82,0,0.3); padding: 5px 10px; border-radius: 2px;
+}
+.f-col h4 {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.f-col ul { list-style: none; }
+.f-col li { margin-bottom: 10px; }
+.f-col a { font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.18s; }
+.f-col a:hover { color: rgba(255,255,255,0.9); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 28px; font-size: 12px; color: rgba(255,255,255,0.25);
+  flex-wrap: wrap; gap: 8px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  nav { padding: 0 20px; }
+  .nav-center { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 28px; }
+  .hero-left::after { display: none; }
+  .hero-right { min-height: 280px; }
+  .about-inner { grid-template-columns: 1fr; gap: 40px; }
+  .about-sidebar { position: static; }
+  .about-year { font-size: 72px; }
+  .eq-split { grid-template-columns: 1fr; }
+  .eq-right { display: none; }
+  .eq-left { padding: 72px 28px; }
+  .svc-row { grid-template-columns: 48px 1fr; gap: 16px; }
+  .svc-tags { display: none; }
+  .svc-desc { grid-column: span 2; grid-row: 2; margin-top: 0; }
+  .work-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .wcard:nth-child(1) { grid-column: span 2; grid-row: auto; }
+  .wcard:nth-child(2), .wcard:nth-child(3), .wcard:nth-child(4) { grid-column: span 1; }
+  .wcard { min-height: 220px; }
+  .process-timeline { grid-template-columns: 1fr; }
+  .timeline-rail { display: none; }
+  .tstep::before { display: none; }
+  .quote-split { grid-template-columns: 1fr; }
+  .quote-left, .quote-right { padding: 72px 28px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  #about, #services, #projects, #process { padding: 80px 28px; }
+}
+@media (max-width: 640px) {
+  .hero-h1 { font-size: 64px; }
+  .frow { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .work-grid { grid-template-columns: 1fr; }
+  .wcard:nth-child(n) { grid-column: span 1; }
+  .svc-row { grid-template-columns: 1fr; }
+  .svc-num { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-top">Die<em>-</em>Namic</span>
+      <span class="nav-logo-sub">Tool &amp; Die · Ravenna, OH</span>
+    </a>
+    <ul class="nav-center">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#equipment">Equipment</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#process">Process</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="tel:3306801153" class="nav-phone">(330) 680-1153</a>
+      <a href="#quote" class="nav-quote">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">ISO Compliant · Family Owned · Ravenna, Ohio</div>
+    <h1 class="hero-h1">
+      Tight<br>
+      Toler<em>ances.</em><br>
+      Right Parts.
+    </h1>
+    <p class="hero-desc">CNC milling, Wire EDM, and surface grinding — machined to spec, every time. 55+ years of combined experience on the floor.</p>
+    <div class="hero-btns">
+      <a href="#quote" class="btn-fill">Request a Quote</a>
+      <a href="#services" class="btn-line">Our Capabilities</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mesh"></div>
+    <div class="hero-right-grid">
+      <div class="hero-big-stat">
+        <div class="hero-big-num">55</div>
+        <div class="hero-big-label">Years combined experience</div>
+      </div>
+      <div class="hero-stats-stack">
+        <div class="hstat">
+          <span class="hstat-val">±<em>.0001</em></span>
+          <span class="hstat-desc">Tolerance capability</span>
+        </div>
+        <div class="hstat">
+          <span class="hstat-val"><em>ISO</em></span>
+          <span class="hstat-desc">Compliant quality standards</span>
+        </div>
+        <div class="hstat">
+          <span class="hstat-val"><em>6</em></span>
+          <span class="hstat-desc">Core machining services</span>
+        </div>
+        <div class="hero-iso">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          DMG Mori · Wire EDM · Grinding
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>DMG Mori Duravertical 5100</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Wire EDM</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Surface Grinding</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Progressive Die Tooling</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>AutoCAD &amp; Mastercam Accepted</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>ISO Compliant</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>4-Slide &amp; Roll Form Tooling</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Family Owned · Ravenna, Ohio</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>DMG Mori Duravertical 5100</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Wire EDM</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Surface Grinding</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Progressive Die Tooling</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>AutoCAD &amp; Mastercam Accepted</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>ISO Compliant</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>4-Slide &amp; Roll Form Tooling</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Family Owned · Ravenna, Ohio</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-sidebar">
+      <div class="about-year">55+</div>
+      <div class="about-tag">About the Shop</div>
+      <h2 class="about-h">Built on<br>Experience.</h2>
+      <p class="about-body">Die-Namic Tool &amp; Die is a family-owned precision machine shop in Ravenna, Ohio. We do the kind of work that demands experience — tight-tolerance tooling, complex profiles, and parts that have to be right the first time.</p>
+      <a href="#quote" class="btn-fill" style="align-self:flex-start; display:inline-block; margin-top:8px;">Talk to Us</a>
+    </div>
+    <div class="about-right">
+      <div class="about-point">
+        <div class="about-point-num">01</div>
+        <div>
+          <div class="about-point-title">ISO Compliant Quality</div>
+          <div class="about-point-body">Every job that leaves our floor is inspected to ISO quality standards. Not a checkbox — a habit built over decades of precision work.</div>
+        </div>
+      </div>
+      <div class="about-point">
+        <div class="about-point-num">02</div>
+        <div>
+          <div class="about-point-title">Progressive Die Specialists</div>
+          <div class="about-point-body">Punches, die sections, strippers, guides — we know progressive die tooling inside and out. Built for 4-slide machines, roll forms, molds, and custom machinery.</div>
+        </div>
+      </div>
+      <div class="about-point">
+        <div class="about-point-num">03</div>
+        <div>
+          <div class="about-point-title">Production CNC Capacity</div>
+          <div class="about-point-body">Our DMG Mori Duravertical 5100 keeps us competitive on production runs. Send us your files — AutoCAD, Mastercam 2D or 3D — and we'll run it.</div>
+        </div>
+      </div>
+      <div class="about-point">
+        <div class="about-point-num">04</div>
+        <div>
+          <div class="about-point-title">Family Owned, Personally Run</div>
+          <div class="about-point-body">No layers of management between you and the people machining your parts. You deal directly with the shop — fast answers, no runaround.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-tag">Capabilities</div>
+        <h2 class="section-h">What We Do</h2>
+      </div>
+      <a href="#quote" class="btn-line">Start a Project</a>
+    </div>
+    <div class="services-list">
+      <div class="svc-row">
+        <div class="svc-num">01</div>
+        <div class="svc-name">CNC Milling</div>
+        <div class="svc-desc">High-precision milling on our DMG Mori Duravertical 5100. Complex geometries, tight tolerances, and production volumes handled with consistency.</div>
+        <div class="svc-tags"><span class="tag">DMG Mori</span><span class="tag">3-Axis</span><span class="tag">Production</span></div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Wire EDM</div>
+        <div class="svc-desc">Intricate profiles and cuts in hardened materials that conventional tooling can't touch. Ideal for punch profiles and die sections requiring extreme precision.</div>
+        <div class="svc-tags"><span class="tag">Hardened Steel</span><span class="tag">Complex Profiles</span></div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">03</div>
+        <div class="svc-name">Surface Grinding</div>
+        <div class="svc-desc">Fine finishes, exact thickness, and critical flatness on die and mold components. Where surface quality matters, we deliver.</div>
+        <div class="svc-tags"><span class="tag">Flatness</span><span class="tag">Fine Finish</span></div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">04</div>
+        <div class="svc-name">Progressive Die Tooling</div>
+        <div class="svc-desc">Full detail pack production for progressive die builds — punches, die sections, strippers, and guides machined to high repeatability.</div>
+        <div class="svc-tags"><span class="tag">Punches &amp; Dies</span><span class="tag">Detail Packs</span></div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">05</div>
+        <div class="svc-name">4-Slide &amp; Roll Form Tooling</div>
+        <div class="svc-desc">Specialized components for 4-slide machines and roll forming lines. Precise geometry in hardened materials for long tooling life.</div>
+        <div class="svc-tags"><span class="tag">4-Slide</span><span class="tag">Roll Form</span></div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-num">06</div>
+        <div class="svc-name">Custom Parts &amp; Molds</div>
+        <div class="svc-desc">One-off and short-run custom components for molds and specialty machines. We work from your files and deliver to print — no guesswork.</div>
+        <div class="svc-tags"><span class="tag">Custom</span><span class="tag">Short Run</span><span class="tag">Molds</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section id="equipment">
+  <div class="eq-split">
+    <div class="eq-left">
+      <div class="eq-tag">The Floor</div>
+      <h2 class="eq-h">Our<br>Equipment</h2>
+      <p class="eq-body">Top-tier machines, maintained to perform. CNC and manual capability side by side — so we can handle production runs and one-offs with equal precision.</p>
+      <div class="eq-table">
+        <div class="eq-row">
+          <span class="eq-row-name">Bridgeport Milling Machines</span>
+          <span class="eq-row-detail">Manual milling</span>
+        </div>
+        <div class="eq-row">
+          <span class="eq-row-name">Engine Lathes</span>
+          <span class="eq-row-detail">Turning &amp; threading</span>
+        </div>
+        <div class="eq-row">
+          <span class="eq-row-name">Surface Grinders</span>
+          <span class="eq-row-detail">Flat &amp; parallel finishing</span>
+        </div>
+        <div class="eq-row">
+          <span class="eq-row-name">Wire EDM System</span>
+          <span class="eq-row-detail">Complex profile cutting</span>
+        </div>
+        <div class="eq-row">
+          <span class="eq-row-name">Bliss Presses</span>
+          <span class="eq-row-detail">Stamping &amp; forming</span>
+        </div>
+        <div class="eq-row">
+          <span class="eq-row-name">AutoCAD &amp; Mastercam</span>
+          <span class="eq-row-detail">2D &amp; 3D file formats accepted</span>
+        </div>
+      </div>
+    </div>
+    <div class="eq-right">
+      <div class="eq-feature-label">Featured Machine</div>
+      <div class="eq-feature-name">DMG Mori<br>Duravertical<br>5100</div>
+      <p class="eq-feature-body">Our primary CNC machining center. High-performance vertical milling with the rigidity and accuracy to hold tight tolerances across production-volume runs.</p>
+      <div class="eq-specs">
+        <div class="eq-spec">5-axis capable vertical machining</div>
+        <div class="eq-spec">High-speed spindle for complex geometries</div>
+        <div class="eq-spec">Production volume capacity</div>
+        <div class="eq-spec">Programmed via Mastercam 3D</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="projects">
+  <div class="work-inner">
+    <div class="work-header">
+      <div>
+        <div class="section-tag">Portfolio</div>
+        <h2 class="section-h">Recent Work</h2>
+      </div>
+      <a href="#quote" class="btn-fill">Start Your Project</a>
+    </div>
+    <div class="work-grid">
+      <div class="wcard">
+        <div class="wcard-bg">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1A1D22" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid)">Project Photo</span>
+        </div>
+        <div class="wcard-info">
+          <div class="wcard-tag">Progressive Die Tooling</div>
+          <div class="wcard-title">Multi-Stage Stamping Die Detail Pack</div>
+          <div class="wcard-meta">CNC Milling · Wire EDM · Surface Grinding</div>
+        </div>
+      </div>
+      <div class="wcard">
+        <div class="wcard-bg">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1A1D22" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="wcard-info">
+          <div class="wcard-tag">4-Slide Tooling</div>
+          <div class="wcard-title">4-Slide Machine Tool Set</div>
+          <div class="wcard-meta">CNC · Hardened D2 Tool Steel</div>
+        </div>
+      </div>
+      <div class="wcard">
+        <div class="wcard-bg">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1A1D22" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="wcard-info">
+          <div class="wcard-tag">Wire EDM</div>
+          <div class="wcard-title">Complex Punch &amp; Die Profiles</div>
+          <div class="wcard-meta">±.0001" Tolerance</div>
+        </div>
+      </div>
+      <div class="wcard">
+        <div class="wcard-bg">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1A1D22" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="wcard-info">
+          <div class="wcard-tag">Production CNC</div>
+          <div class="wcard-title">High-Volume Milled Components</div>
+          <div class="wcard-meta">DMG Mori · 500+ pcs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header">
+      <div>
+        <div class="gallery-tag">Inside the Shop</div>
+        <h2 class="gallery-h">The Floor</h2>
+      </div>
+      <p class="gallery-sub">Real machines, real parts. A look at what we run and what we make.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gitem" data-idx="0">
+        <img src="assets/shop-floor.jpg" alt="Shop floor">
+        <div class="gitem-info">
+          <div class="gitem-cat">Shop Floor</div>
+          <div class="gitem-name">Bliss OBI Stamping Presses</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="1">
+        <img src="assets/parts-flatlay-2.jpg" alt="Machined parts">
+        <div class="gitem-info">
+          <div class="gitem-cat">Finished Parts</div>
+          <div class="gitem-name">Ring Gears &amp; Die Sections</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="2">
+        <img src="assets/dmg-mori-wide.jpg" alt="DMG Mori Dura Vertical 5100">
+        <div class="gitem-info">
+          <div class="gitem-cat">CNC Machining</div>
+          <div class="gitem-name">DMG Mori Dura Vertical 5100</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="3">
+        <img src="assets/edm-510-wide.jpg" alt="Charmilles Robofil 510">
+        <div class="gitem-info">
+          <div class="gitem-cat">Wire EDM</div>
+          <div class="gitem-name">Charmilles Robofil 510</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="4">
+        <img src="assets/parts-flatlay-1.jpg" alt="Machined components">
+        <div class="gitem-info">
+          <div class="gitem-cat">Finished Parts</div>
+          <div class="gitem-name">Precision Machined Components</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="5">
+        <img src="assets/part-assembly.jpg" alt="Punch and die assembly">
+        <div class="gitem-info">
+          <div class="gitem-cat">Die Tooling</div>
+          <div class="gitem-name">Multi-Tier Punch &amp; Die Assembly</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="6">
+        <img src="assets/edm-290p.jpg" alt="Charmilles Robofil 290P">
+        <div class="gitem-info">
+          <div class="gitem-cat">Wire EDM</div>
+          <div class="gitem-name">Charmilles Robofil 290P</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="7">
+        <img src="assets/surface-grinder.jpg" alt="Surface grinder">
+        <div class="gitem-info">
+          <div class="gitem-cat">Surface Grinding</div>
+          <div class="gitem-name">Boyar-Schultz SGS-1230AHD</div>
+        </div>
+      </div>
+      <div class="gitem" data-idx="8">
+        <img src="assets/bliss-press.jpg" alt="Bliss OBI Press">
+        <div class="gitem-info">
+          <div class="gitem-cat">Stamping</div>
+          <div class="gitem-name">Bliss OBI Stamping Press</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lb-overlay" id="lightbox">
+  <div class="lb-box">
+    <button class="lb-close" id="lbClose">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev">&#8592;</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lb-btn lb-next" id="lbNext">&#8594;</button>
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-inner">
+    <div class="process-header">
+      <div class="section-tag">How It Works</div>
+      <h2 class="section-h">From File<br>to Floor</h2>
+    </div>
+    <div class="process-timeline">
+      <div class="timeline-rail"></div>
+      <div class="timeline-steps">
+        <div class="tstep">
+          <div class="tstep-num">01</div>
+          <div class="tstep-content">
+            <div class="tstep-name">Send Your Files</div>
+            <div class="tstep-body">Upload your AutoCAD or Mastercam files (2D or 3D). Include tolerances, material specs, quantity, and any special notes. No format we can't work with.</div>
+          </div>
+        </div>
+        <div class="tstep">
+          <div class="tstep-num">02</div>
+          <div class="tstep-content">
+            <div class="tstep-name">Free Quote</div>
+            <div class="tstep-body">We review your job and send back a clear, no-obligation quote — usually within 1–2 business days. No upsells, no runaround.</div>
+          </div>
+        </div>
+        <div class="tstep">
+          <div class="tstep-num">03</div>
+          <div class="tstep-content">
+            <div class="tstep-name">We Machine It</div>
+            <div class="tstep-body">Once approved we schedule, set up, and run your job using the right combination of CNC, EDM, and grinding. You'll know where it stands.</div>
+          </div>
+        </div>
+        <div class="tstep">
+          <div class="tstep-num">04</div>
+          <div class="tstep-content">
+            <div class="tstep-name">Inspect &amp; Deliver</div>
+            <div class="tstep-body">Every part is inspected to ISO standards before it ships. Parts that are right the first time — that's the only kind we send out the door.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <div class="quote-split">
+    <div class="quote-left">
+      <div class="quote-tag">Get Started</div>
+      <h2 class="quote-h">Request<br>a Free<br>Quote</h2>
+      <p class="quote-body">Send us your project details and files. We'll review the scope and get back to you with a clear quote — no obligation, no runaround.</p>
+      <div class="contact-stack">
+        <div class="crow">
+          <svg class="crow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <div class="crow-label">Address</div>
+            <div class="crow-val">100 Romito Street, Unit D<br>Ravenna, Ohio 44266</div>
+          </div>
+        </div>
+        <div class="crow">
+          <svg class="crow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <div class="crow-label">Phone</div>
+            <div class="crow-val"><a href="tel:3306801153">(330) 680-1153</a></div>
+          </div>
+        </div>
+        <div class="crow">
+          <svg class="crow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <div class="crow-label">Email</div>
+            <div class="crow-val"><a href="mailto:Fredjcox@dienamictd.com">Fredjcox@dienamictd.com</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-right">
+      <div class="form-hed">Tell Us About Your Job</div>
+      <div class="frow">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Fred"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Cox"></div>
+      </div>
+      <div class="fg"><label>Company</label><input type="text" placeholder="Your Company Name"></div>
+      <div class="frow">
+        <div class="fg"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+        <div class="fg"><label>Phone</label><input type="tel" placeholder="(330) 000-0000"></div>
+      </div>
+      <div class="fg">
+        <label>Service Needed</label>
+        <select>
+          <option value="" disabled selected>Select a service...</option>
+          <option>CNC Milling</option>
+          <option>Wire EDM</option>
+          <option>Surface Grinding</option>
+          <option>Progressive Die Tooling</option>
+          <option>4-Slide / Roll Form Tooling</option>
+          <option>Custom Parts / Molds</option>
+          <option>Multiple / Not Sure</option>
+        </select>
+      </div>
+      <div class="fg"><label>Project Details</label><textarea placeholder="Material, quantity, tolerances, deadline, or anything else we should know..."></textarea></div>
+      <div class="upload-area" onclick="this.querySelector('input').click()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D95200" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p>Drop files here or <span>click to browse</span></p>
+        <small>AutoCAD (.dwg, .dxf) · Mastercam (.mcam) · STEP · PDF</small>
+        <input type="file" style="display:none" accept=".dwg,.dxf,.mcam,.step,.stp,.pdf,.iges,.igs" multiple>
+      </div>
+      <button class="btn-send" id="submitBtn">Submit Quote Request</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="f-brand-name">Die<em>-</em>Namic</div>
+        <div class="f-brand-sub">Tool &amp; Die</div>
+        <p class="f-tagline">Family-owned CNC machine shop in Ravenna, Ohio. Precision parts, tight tolerances, and 55+ years of combined experience on every job.</p>
+        <div class="f-iso">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          ISO Compliant
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">CNC Milling</a></li>
+          <li><a href="#services">Wire EDM</a></li>
+          <li><a href="#services">Surface Grinding</a></li>
+          <li><a href="#services">Progressive Die</a></li>
+          <li><a href="#services">4-Slide &amp; Roll Form</a></li>
+          <li><a href="#services">Custom Parts</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#equipment">Equipment</a></li>
+          <li><a href="#projects">Our Work</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#quote">Get a Quote</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:3306801153">(330) 680-1153</a></li>
+          <li><a href="mailto:Fredjcox@dienamictd.com">Fredjcox@dienamictd.com</a></li>
+          <li><a href="#">100 Romito St, Unit D<br>Ravenna, OH 44266</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Die-Namic Tool &amp; Die. All rights reserved.</span>
+      <span>Ravenna, Ohio · CNC Machining · Wire EDM · Surface Grinding</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Pill nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-center a');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const m = document.querySelector(`.nav-center a[href="#${e.target.id}"]`);
+        if (m) m.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => io.observe(s));
+
+  // Gallery lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+  let lbIdx = 0;
+  const galleryData = Array.from(document.querySelectorAll('.gitem')).map(el => ({
+    src: el.querySelector('img').src,
+    cap: el.querySelector('.gitem-name').textContent
+  }));
+  function lbOpen(i) {
+    lbIdx = i;
+    lbImg.src = galleryData[i].src;
+    lbCap.textContent = galleryData[i].cap;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.gitem').forEach((el, i) => el.addEventListener('click', () => lbOpen(i)));
+  document.getElementById('lbClose').addEventListener('click', lbClose);
+  lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+  document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); lbOpen((lbIdx - 1 + galleryData.length) % galleryData.length); });
+  document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); lbOpen((lbIdx + 1) % galleryData.length); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft') lbOpen((lbIdx - 1 + galleryData.length) % galleryData.length);
+    if (e.key === 'ArrowRight') lbOpen((lbIdx + 1) % galleryData.length);
+  });
+
+  // Upload drag feedback
+  const zone = document.querySelector('.upload-area');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = '#D95200'; });
+  zone.addEventListener('dragleave', () => zone.style.borderColor = '');
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.style.borderColor = '';
+    const f = e.dataTransfer.files;
+    if (f.length) zone.querySelector('p').innerHTML = `<strong>${f.length} file(s) ready</strong>`;
+  });
+
+  // Submit feedback
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    this.textContent = 'Quote Request Sent ✓';
+    this.style.background = '#2a6e3a';
+    setTimeout(() => { this.textContent = 'Submit Quote Request'; this.style.background = ''; }, 3000);
+  });
+</script>
+</body>
+</html>
